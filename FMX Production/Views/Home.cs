@@ -48,13 +48,23 @@ namespace FMX_Production
             btnCacnelWeeding.Enabled = true;
             btnAddWeeding.Enabled = true;
             btnCreateTeam.Enabled = true;
+            btnLogIn.Text = "Log Out";
         }
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            LogIn logIn = new LogIn();
-            
-            logIn.Show();
-            this.Hide();
+            if(btnLogIn.Text.Equals("Log In"))
+            {
+                LogIn logIn = new LogIn();
+                logIn.Show();
+                this.Hide();
+               
+            }else if(btnLogIn.Text.Equals("Log Out"))
+            {
+                Form1 form1 = new Form1();
+                form1.Show();
+                this.Close();
+            }
+           
         }
 
         private void btnAddEmploye_Click(object sender, EventArgs e)
