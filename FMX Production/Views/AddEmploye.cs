@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using FMX_Production.Controllers;
 
 namespace FMX_Production.Views
 {
@@ -18,9 +19,9 @@ namespace FMX_Production.Views
         {
             InitializeComponent();
         }
-        SqlCommand cmd;
-        SqlConnection con;
-        SqlDataAdapter da;
+        DataAcess da;
+        
+       
         private void AddEmploye_Load(object sender, EventArgs e)
         {
 
@@ -43,19 +44,9 @@ namespace FMX_Production.Views
             bool isDronist = chbIsDronist.Checked;
             bool isKranist = chbIsKranist.Checked;
             bool isFlycamist = chbIsFlycamist.Checked;
-            con = new SqlConnection(@"Data Source=DESKTOP-A5LDB98;Initial Catalog=fmxProduction;Integrated Security=True");
-            con.Open();
-            cmd = new SqlCommand("INSERT INTO Employes (Name, Surname, Email, Phonenumber, isPhotograph, isCameraman, isKranist, isDronist, isFlycamist) VALUES (@Name, @Surname, @Email, @Phonenumber, @isPhotograph, @isCameraman, @isKranist, @isDronist, @isFlycamist)", con);
-            cmd.Parameters.AddWithValue("@Name", name);
-            cmd.Parameters.AddWithValue("@Surname", surname);
-            cmd.Parameters.AddWithValue("@Email", email);
-            cmd.Parameters.AddWithValue("@Phonenumber", phonenumber);
-            cmd.Parameters.AddWithValue("@isPhotograph", isPhorograph);
-            cmd.Parameters.AddWithValue("@isCameraman", isCameraman);
-            cmd.Parameters.AddWithValue("@isKranist", isKranist);
-            cmd.Parameters.AddWithValue("@isDronist", isDronist);
-            cmd.Parameters.AddWithValue("@isFlycamist", isFlycamist);
-            cmd.ExecuteNonQuery();
+            da.addEmployeToDb(name, surname,email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist , isFlycamist);
+            
+            
             
         }
     }

@@ -76,6 +76,8 @@
     <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DataAcess.cs" />
+    <Compile Include="Controllers\Helper.cs" />
     <Compile Include="Models\Employe.cs" />
     <Compile Include="Views\AddDlsr.cs">
       <SubType>Form</SubType>
@@ -147,9 +149,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
