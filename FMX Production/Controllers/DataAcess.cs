@@ -17,11 +17,12 @@ namespace FMX_Production.Controllers
         public void addEmployeToDb(string name, string lastName, string email, string phoneNumber,
             bool isPhotoghraph, bool isKameraman, bool isDronist, bool iskranist, bool isFlycamist) {
 
+
         }
         public bool logIn(string username, string password)
         {
             SqlConnection con;
-            con = new SqlConnection(@"Data Source=DESKTOP-A5LDB98;Initial Catalog=fmxProduction;Integrated Security=True");
+            con = new SqlConnection(Helper.CnnVal("fmxproductionDB"));
             con.Open();
             //connection.Query($"SELECT * FROM USERS WHERE username = '" + username + "', and PASSWORD ='" + password + "'");
             string query = "select * from USERS where username = '" + username + "' and PASSWORD ='" + password + "'";
@@ -36,5 +37,6 @@ namespace FMX_Production.Controllers
             else
                 return false;
         }
+
     }
 }
