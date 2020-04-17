@@ -10,7 +10,8 @@ namespace FMX_Production.Controllers
     class Helper
     {
         public static string CnnVal (string name) {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+            string cnS= ConfigurationManager.ConnectionStrings[name].ConnectionString.ToString();
+            return cnS;
         }
 
 

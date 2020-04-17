@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FMX_Production.Views;
+using FMX_Production.Controllers;
+
 
 namespace FMX_Production.Views
 {
@@ -20,15 +22,32 @@ namespace FMX_Production.Views
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-
-        private void btnGuestLogIn_Click(object sender, EventArgs e)
-        {
             Form1 form1 = new Form1();
             form1.Show();
-            btnGuestLogIn.Enabled = false; 
-            this.Hide();
+            this.Close();
+        }
+        
+
+       
+
+        private void btnLogIn_Click(object sender, EventArgs e)
+        {
+
+            DataAcess dataAcess = new DataAcess() ;
+            Form1 home = new Form1();
+            if(dataAcess.logIn(tbUserName.Text.Trim(), tbPassword.Text.Trim()))
+            {
+                home.userLogin();
+                home.Show();
+                this.Hide();
+            }
+            else
+            {
+                lblLogInError.Text = "Incorrect Username or Password";
+                tbPassword.Clear();
+                tbUserName.Clear();
+                
+            }
             
         }
     }

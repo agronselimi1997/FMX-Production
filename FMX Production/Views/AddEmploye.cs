@@ -31,6 +31,7 @@ namespace FMX_Production.Views
         {
             this.Close();
         }
+       
 
         private void btnAddWorker_Click(object sender, EventArgs e)
         {

@@ -1,4 +1,4 @@
-﻿namespace FMX_Production
+﻿ namespace FMX_Production
 {
     partial class Form1
     {
@@ -31,7 +31,7 @@
             this.btnAddEmploye = new System.Windows.Forms.Button();
             this.btnAddEquipment = new System.Windows.Forms.Button();
             this.btnCreateOffer = new System.Windows.Forms.Button();
-            this.addWeeding = new System.Windows.Forms.Button();
+            this.btnAddWeeding = new System.Windows.Forms.Button();
             this.lbWorkers = new System.Windows.Forms.ListBox();
             this.btnDeleteWorker = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,7 +46,7 @@
             this.lwToday = new System.Windows.Forms.ListView();
             this.btnLogIn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.bnCreateTeam = new System.Windows.Forms.Button();
+            this.btnCreateTeam = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddEmploye
@@ -81,15 +81,15 @@
             this.btnCreateOffer.Text = "Krijo Ofertë";
             this.btnCreateOffer.UseVisualStyleBackColor = true;
             // 
-            // addWeeding
+            // btnAddWeeding
             // 
-            this.addWeeding.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addWeeding.Location = new System.Drawing.Point(679, 13);
-            this.addWeeding.Name = "addWeeding";
-            this.addWeeding.Size = new System.Drawing.Size(161, 58);
-            this.addWeeding.TabIndex = 3;
-            this.addWeeding.Text = "Shto Dasëm";
-            this.addWeeding.UseVisualStyleBackColor = true;
+            this.btnAddWeeding.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddWeeding.Location = new System.Drawing.Point(679, 13);
+            this.btnAddWeeding.Name = "btnAddWeeding";
+            this.btnAddWeeding.Size = new System.Drawing.Size(161, 58);
+            this.btnAddWeeding.TabIndex = 3;
+            this.btnAddWeeding.Text = "Shto Dasëm";
+            this.btnAddWeeding.UseVisualStyleBackColor = true;
             // 
             // lbWorkers
             // 
@@ -227,22 +227,22 @@
             this.label5.TabIndex = 17;
             this.label5.Text = "FMX LOGO ";
             // 
-            // bnCreateTeam
+            // btnCreateTeam
             // 
-            this.bnCreateTeam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bnCreateTeam.Location = new System.Drawing.Point(846, 12);
-            this.bnCreateTeam.Name = "bnCreateTeam";
-            this.bnCreateTeam.Size = new System.Drawing.Size(161, 58);
-            this.bnCreateTeam.TabIndex = 18;
-            this.bnCreateTeam.Text = "Krijo Ekip";
-            this.bnCreateTeam.UseVisualStyleBackColor = true;
+            this.btnCreateTeam.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreateTeam.Location = new System.Drawing.Point(846, 12);
+            this.btnCreateTeam.Name = "btnCreateTeam";
+            this.btnCreateTeam.Size = new System.Drawing.Size(161, 58);
+            this.btnCreateTeam.TabIndex = 18;
+            this.btnCreateTeam.Text = "Krijo Ekip";
+            this.btnCreateTeam.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
-            this.Controls.Add(this.bnCreateTeam);
+            this.Controls.Add(this.btnCreateTeam);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnLogIn);
             this.Controls.Add(this.lwToday);
@@ -257,7 +257,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnDeleteWorker);
             this.Controls.Add(this.lbWorkers);
-            this.Controls.Add(this.addWeeding);
+            this.Controls.Add(this.btnAddWeeding);
             this.Controls.Add(this.btnCreateOffer);
             this.Controls.Add(this.btnAddEquipment);
             this.Controls.Add(this.btnAddEmploye);
@@ -274,7 +274,7 @@
         private System.Windows.Forms.Button btnAddEmploye;
         private System.Windows.Forms.Button btnAddEquipment;
         private System.Windows.Forms.Button btnCreateOffer;
-        private System.Windows.Forms.Button addWeeding;
+        private System.Windows.Forms.Button btnAddWeeding;
         private System.Windows.Forms.ListBox lbWorkers;
         private System.Windows.Forms.Button btnDeleteWorker;
         private System.Windows.Forms.Label label1;
@@ -289,7 +289,7 @@
         private System.Windows.Forms.ListView lwToday;
         private System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button bnCreateTeam;
+        private System.Windows.Forms.Button btnCreateTeam;
     }
 }
 
