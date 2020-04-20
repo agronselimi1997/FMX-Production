@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Data;
 using System.Data.SqlClient;
-
+using FMX_Production.Models;
 
 namespace FMX_Production.Controllers
 {
@@ -32,8 +32,16 @@ namespace FMX_Production.Controllers
                 Console.WriteLine(ex.Message);
                 return false;
             }
-           
 
+        }
+        public List<Camera> getCameras()
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("fmxproductionDB")))
+            {
+                var ou = connection.Query<Camera>("select * from Cameras").ToList();
+                return ou;
+
+            }
 
         }
         public bool logIn(string username, string password)
@@ -64,12 +72,62 @@ namespace FMX_Production.Controllers
               
             }
         }
+        public List<Equipment> getEquipment()
+        {
+            using (IDbConnection connection = new SqlConnection(Helper.CnnVal("fmxproductionDB")))
+            {
+                var ou = connection.Query<Equipment>("select * from Equipments").ToList();
+                return ou;
+            }
+        }
         public void deleteEmployeById (int id)
         {
             using (IDbConnection connection = new SqlConnection(Helper.CnnVal("fmxproductionDB")))
             {
                 connection.Query("delete from Employes where Id = '" + id + "'");
             }
+        }
+
+        public bool addEquipment(string name, string lensSerial, bool isDron, bool isKran, bool isPhotoAparat, bool isFlycam, int cmeraID, bool isOther)
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(Helper.CnnVal("fmxproductionDB"));
+                con.Open();
+                string query = "insert into Equipments (Name, LensSerial, isDron, isKran, isPhotoAparat, isFlycam, CameraID, isOther)";
+                query += " values('" + name + "','" + lensSerial + "','" + isDron + "','" + isKran + "','" + isPhotoAparat + "','" + isFlycam + "','" + cmeraID + "','" + isOther + "')";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }catch(SqlException ex)
+            {
+                Console.WriteLine("ADD Equipment");
+                return false;
+            }
+
+        }
+        
+        
+        public bool addCamera(string name, bool isHD, bool is4K)
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(Helper.CnnVal("fmxproductionDB"));
+                con.Open();
+                string query = "insert into Cameras (Name, is4K, isHD)";
+                query += " values('" + name + "','" + is4K + "','" + isHD +"')";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("Add Camera");
+                return false;
+            }
+
         }
 
     }

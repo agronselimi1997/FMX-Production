@@ -78,7 +78,9 @@
   <ItemGroup>
     <Compile Include="Controllers\DataAcess.cs" />
     <Compile Include="Controllers\Helper.cs" />
+    <Compile Include="Models\Camera.cs" />
     <Compile Include="Models\Employe.cs" />
+    <Compile Include="Models\Equipment.cs" />
     <Compile Include="Views\AddDlsr.cs">
       <SubType>Form</SubType>
     </Compile>
