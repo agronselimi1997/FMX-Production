@@ -19,7 +19,7 @@ namespace FMX_Production.Views
         {
             InitializeComponent();
         }
-        DataAcess da;
+        DataAcess da =  new DataAcess();
         
        
         private void AddEmploye_Load(object sender, EventArgs e)
@@ -30,6 +30,18 @@ namespace FMX_Production.Views
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        public void resetForm()
+        {
+            tbEmployeEmail.Clear();
+            tbEmployeName.Clear();
+            tbEmployePhoneNumber.Clear();
+            tbEmployeSurname.Clear();
+            chbIsCameraman.Checked = false;
+            chbIsDronist.Checked = false;
+            chbIsFlycamist.Checked = false;
+            chbIsPhotograph.Checked = false;
+            chbIsKranist.Checked = false;
         }
        
 
@@ -45,10 +57,24 @@ namespace FMX_Production.Views
             bool isDronist = chbIsDronist.Checked;
             bool isKranist = chbIsKranist.Checked;
             bool isFlycamist = chbIsFlycamist.Checked;
-            da.addEmployeToDb(name, surname,email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist , isFlycamist);
-            
-            
-            
+           if(da.addEmployeToDb(name, surname,email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist , isFlycamist))
+            {
+                resetForm();
+                lblErrorMessage.Text = "Me sukses !";
+                
+
+            }
+            else
+            {
+                MessageBox.Show("There was an error while adding the employe", "ok", MessageBoxButtons.OK);
+                resetForm();
+                
+            }
+        }
+
+        private void tbEmployeName_TextChanged(object sender, EventArgs e)
+        {
+            lblErrorMessage.Text = "";
         }
     }
 }

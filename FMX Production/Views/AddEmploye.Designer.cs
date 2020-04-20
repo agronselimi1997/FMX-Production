@@ -43,6 +43,7 @@
             this.chbIsDronist = new System.Windows.Forms.CheckBox();
             this.btnAddWorker = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.lblErrorMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbEmployeName
@@ -52,6 +53,7 @@
             this.tbEmployeName.Name = "tbEmployeName";
             this.tbEmployeName.Size = new System.Drawing.Size(299, 30);
             this.tbEmployeName.TabIndex = 0;
+            this.tbEmployeName.TextChanged += new System.EventHandler(this.tbEmployeName_TextChanged);
             // 
             // tbEmployeSurname
             // 
@@ -194,11 +196,22 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // lblErrorMessage
+            // 
+            this.lblErrorMessage.AutoSize = true;
+            this.lblErrorMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblErrorMessage.Location = new System.Drawing.Point(185, 44);
+            this.lblErrorMessage.Name = "lblErrorMessage";
+            this.lblErrorMessage.Size = new System.Drawing.Size(0, 31);
+            this.lblErrorMessage.TabIndex = 15;
+            // 
             // AddEmploye
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(541, 450);
+            this.Controls.Add(this.lblErrorMessage);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAddWorker);
             this.Controls.Add(this.chbIsDronist);
@@ -239,5 +252,6 @@
         private System.Windows.Forms.CheckBox chbIsDronist;
         private System.Windows.Forms.Button btnAddWorker;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label lblErrorMessage;
     }
 }

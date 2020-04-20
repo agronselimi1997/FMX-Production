@@ -99,6 +99,7 @@
             this.lbWorkers.Name = "lbWorkers";
             this.lbWorkers.Size = new System.Drawing.Size(283, 580);
             this.lbWorkers.TabIndex = 4;
+            this.lbWorkers.DoubleClick += new System.EventHandler(this.lbWorkers_DoubleClick);
             // 
             // btnDeleteWorker
             // 
@@ -109,6 +110,7 @@
             this.btnDeleteWorker.TabIndex = 5;
             this.btnDeleteWorker.Text = "Fshij";
             this.btnDeleteWorker.UseVisualStyleBackColor = true;
+            this.btnDeleteWorker.Click += new System.EventHandler(this.btnDeleteWorker_Click);
             // 
             // label1
             // 
