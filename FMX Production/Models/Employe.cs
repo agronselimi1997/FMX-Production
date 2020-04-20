@@ -17,9 +17,10 @@ namespace FMX_Production
         bool isDronist { get; set; }
         bool isKameraman { get; set; }
         public string employeEmail { get; set; }
-        public string  phoneNumber { get; set; }
-        public string  fullinfo {
-            get { return employeName +" " + employeSurname;  }
+        public string phoneNumber { get; set; }
+        public string fullinfo
+        {
+            get { return employeName + " " + employeSurname; }
         }
         public int getId()
         {
@@ -38,8 +39,8 @@ namespace FMX_Production
             this.employeEmail = employeEmail;
             this.phoneNumber = phoneNumber;
         }
-       
-        public Employe(System.Int32 Id, System.String Name, System.String Surname, System.String Email, System.String Phonenumber, System.Boolean isPhotograph, System.Boolean isCameraman, 
+
+        public Employe(System.Int32 Id, System.String Name, System.String Surname, System.String Email, System.String Phonenumber, System.Boolean isPhotograph, System.Boolean isCameraman,
             System.Boolean isKranist, System.Boolean isDronist, System.Boolean isFlycamist)
         {
             this.id = Id;

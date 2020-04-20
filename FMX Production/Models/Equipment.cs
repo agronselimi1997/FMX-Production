@@ -11,18 +11,18 @@ namespace FMX_Production.Models
         public int id { get; set; }
         public string name { get; set; }
         public string lensSerial { get; set; }
-        public bool  isCamera { get; set; }
+        public bool isCamera { get; set; }
         public bool isDron { get; set; }
-        public bool  isKran { get; set; }
-        public bool  isPhotoAparat { get; set; }
-        public bool  isFlycam { get; set; }
-        public bool  isHD { get; set; }
+        public bool isKran { get; set; }
+        public bool isPhotoAparat { get; set; }
+        public bool isFlycam { get; set; }
+        public bool isHD { get; set; }
         public bool is4K { get; set; }
         public int CameraID { get; set; }
         public bool isOther { get; set; }
-        
 
-        public Equipment( int id, string name, string lensSerial, bool isCamera, bool isDron, bool isKran, bool isPhotoAparat, bool isFlycam, bool isHD, bool is4K, int cameraID, bool isOther)
+
+        public Equipment(int id, string name, string lensSerial, bool isCamera, bool isDron, bool isKran, bool isPhotoAparat, bool isFlycam, bool isHD, bool is4K, int cameraID, bool isOther)
         {
             this.id = id;
             this.name = name;
@@ -52,7 +52,7 @@ namespace FMX_Production.Models
             this.CameraID = CameraID;
             this.isOther = isOther;
         }
-    
 
-}
+
+    }
 }

@@ -33,35 +33,35 @@ namespace FMX_Production.Views
 
         public void check()
         {
-            if(rbAparat.Checked == true)
+            if (rbAparat.Checked == true)
             {
                 resetForm();
-                
+
                 chB4k.Enabled = false;
                 chBhd.Enabled = false;
                 cbCameraId.Visible = false;
-                
+
             }
-            if(rbCamera.Checked == true)
+            if (rbCamera.Checked == true)
             {
                 resetForm();
                 tbLensSerial.Enabled = false;
-               
+
                 cbCameraId.Visible = false;
-                
+
             }
             if (rbDron.Checked == true)
             {
                 resetForm();
                 tbLensSerial.Enabled = false;
-               
+
                 cbCameraId.Visible = false;
             }
-            if(rbFlycam.Checked == true)
+            if (rbFlycam.Checked == true)
             {
                 resetForm();
                 tbLensSerial.Enabled = false;
-                
+
                 cbCameraId.Visible = true;
                 chB4k.Enabled = false;
                 chBhd.Enabled = false;
@@ -72,7 +72,7 @@ namespace FMX_Production.Views
                 resetForm();
 
             }
-            if(rbKran.Checked == true)
+            if (rbKran.Checked == true)
             {
                 resetForm();
                 tbLensSerial.Enabled = false;
@@ -86,7 +86,7 @@ namespace FMX_Production.Views
             cameras = dataAcess.getCameras();
             cbCameraId.DataSource = cameras;
             cbCameraId.DisplayMember = "name";
-            
+
 
         }
         public void fillListBoxes()
@@ -107,12 +107,12 @@ namespace FMX_Production.Views
             chB4k.Enabled = true;
             chBhd.Enabled = true;
             tbName.Clear();
-            
+
             tbLensSerial.Enabled = true;
             cbCameraId.Visible = true;
             fillCameras();
             fillListBoxes();
-            
+
 
 
         }
@@ -166,9 +166,9 @@ namespace FMX_Production.Views
             bool isOther = rbOther.Checked;
             Camera selectedCamera = cbCameraId.SelectedItem as Camera;
             int cmeraID = selectedCamera.id;
-            if(rbCamera.Checked == true)
+            if (rbCamera.Checked == true)
             {
-               if(dataAcess.addCamera(name,isHD, is4K))
+                if (dataAcess.addCamera(name, isHD, is4K))
                 {
                     resetForm();
                 }

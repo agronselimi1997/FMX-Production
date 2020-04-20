@@ -26,16 +26,16 @@ namespace FMX_Production.Views
             form1.Show();
             this.Close();
         }
-        
 
-       
+
+
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
 
-            DataAcess dataAcess = new DataAcess() ;
+            DataAcess dataAcess = new DataAcess();
             Form1 home = new Form1();
-            if(dataAcess.logIn(tbUserName.Text.Trim(), tbPassword.Text.Trim()))
+            if (dataAcess.logIn(tbUserName.Text.Trim(), tbPassword.Text.Trim()))
             {
                 home.userLogin();
                 home.Show();
@@ -46,9 +46,9 @@ namespace FMX_Production.Views
                 lblLogInError.Text = "Incorrect Username or Password";
                 tbPassword.Clear();
                 tbUserName.Clear();
-                
+
             }
-            
+
         }
     }
 }

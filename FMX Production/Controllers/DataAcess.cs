@@ -12,11 +12,12 @@ namespace FMX_Production.Controllers
 {
     class DataAcess
     {
-       
+
 
 
         public bool addEmployeToDb(string name, string lastName, string email, string phoneNumber,
-            bool isPhotoghraph, bool isKameraman, bool isDronist, bool iskranist, bool isFlycamist) {
+            bool isPhotoghraph, bool isKameraman, bool isDronist, bool iskranist, bool isFlycamist)
+        {
             try
             {
                 SqlConnection con = new SqlConnection(Helper.CnnVal("fmxproductionDB"));
@@ -27,7 +28,8 @@ namespace FMX_Production.Controllers
                 cmd.ExecuteNonQuery();
                 con.Close();
                 return true;
-            } catch (SqlException ex)
+            }
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
@@ -51,7 +53,7 @@ namespace FMX_Production.Controllers
             con.Open();
             //connection.Query($"SELECT * FROM USERS WHERE username = '" + username + "', and PASSWORD ='" + password + "'");
             string query = "select * from USERS where username = '" + username + "' and PASSWORD ='" + password + "'";
-            SqlDataAdapter da = new SqlDataAdapter (query, con);
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
             DataTable dataTable = new DataTable();
             da.Fill(dataTable);
             if (dataTable.Rows.Count == 1)
@@ -64,12 +66,12 @@ namespace FMX_Production.Controllers
         }
         public List<Employe> getAllEmployes()
         {
-           
+
             using (IDbConnection connection = new SqlConnection(Helper.CnnVal("fmxproductionDB")))
             {
                 var ou = connection.Query<Employe>("select * from Employes").ToList();
                 return ou;
-              
+
             }
         }
         public List<Equipment> getEquipment()
@@ -80,7 +82,7 @@ namespace FMX_Production.Controllers
                 return ou;
             }
         }
-        public void deleteEmployeById (int id)
+        public void deleteEmployeById(int id)
         {
             using (IDbConnection connection = new SqlConnection(Helper.CnnVal("fmxproductionDB")))
             {
@@ -100,15 +102,16 @@ namespace FMX_Production.Controllers
                 cmd.ExecuteNonQuery();
                 con.Close();
                 return true;
-            }catch(SqlException ex)
+            }
+            catch (SqlException ex)
             {
                 Console.WriteLine("ADD Equipment");
                 return false;
             }
 
         }
-        
-        
+
+
         public bool addCamera(string name, bool isHD, bool is4K)
         {
             try
@@ -116,7 +119,7 @@ namespace FMX_Production.Controllers
                 SqlConnection con = new SqlConnection(Helper.CnnVal("fmxproductionDB"));
                 con.Open();
                 string query = "insert into Cameras (Name, is4K, isHD)";
-                query += " values('" + name + "','" + is4K + "','" + isHD +"')";
+                query += " values('" + name + "','" + is4K + "','" + isHD + "')";
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.ExecuteNonQuery();
                 con.Close();

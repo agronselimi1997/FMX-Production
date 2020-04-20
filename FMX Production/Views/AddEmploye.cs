@@ -19,9 +19,9 @@ namespace FMX_Production.Views
         {
             InitializeComponent();
         }
-        DataAcess da =  new DataAcess();
-        
-       
+        DataAcess da = new DataAcess();
+
+
         private void AddEmploye_Load(object sender, EventArgs e)
         {
 
@@ -43,7 +43,7 @@ namespace FMX_Production.Views
             chbIsPhotograph.Checked = false;
             chbIsKranist.Checked = false;
         }
-       
+
 
         private void btnAddWorker_Click(object sender, EventArgs e)
         {
@@ -57,18 +57,18 @@ namespace FMX_Production.Views
             bool isDronist = chbIsDronist.Checked;
             bool isKranist = chbIsKranist.Checked;
             bool isFlycamist = chbIsFlycamist.Checked;
-           if(da.addEmployeToDb(name, surname,email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist , isFlycamist))
+            if (da.addEmployeToDb(name, surname, email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist, isFlycamist))
             {
                 resetForm();
                 lblErrorMessage.Text = "Me sukses !";
-                
+
 
             }
             else
             {
                 MessageBox.Show("There was an error while adding the employe", "ok", MessageBoxButtons.OK);
                 resetForm();
-                
+
             }
         }
 
