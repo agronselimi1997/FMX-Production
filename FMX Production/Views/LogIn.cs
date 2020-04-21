@@ -22,24 +22,16 @@ namespace FMX_Production.Views
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1();
-            form1.Show();
-            this.Close();
+            DialogResult = DialogResult.Cancel;
         }
-
-
-
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
 
             DataAcess dataAcess = new DataAcess();
-            Form1 home = new Form1();
             if (dataAcess.logIn(tbUserName.Text.Trim(), tbPassword.Text.Trim()))
             {
-                home.userLogin();
-                home.Show();
-                this.Hide();
+                DialogResult = DialogResult.OK;
             }
             else
             {

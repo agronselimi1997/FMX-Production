@@ -19,9 +19,7 @@ namespace FMX_Production
         public Form1()
         {
             InitializeComponent();
-            fillEmployes();
-
-
+            guestLogin();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -49,16 +47,20 @@ namespace FMX_Production
 
         }
 
-
-
         public void userLogin()
         {
+            fillEmployes();
+
             btnAddEmploye.Enabled = true;
             btnCreateOffer.Enabled = true;
             btnDeleteWeeding.Enabled = true;
             if (lbWorkers.Items.Count == 0)
             {
                 btnDeleteWorker.Enabled = false;
+            } 
+            else
+            {
+                btnDeleteWorker.Enabled = true;
             }
 
             btnConfirmWeeding.Enabled = true;
@@ -66,22 +68,45 @@ namespace FMX_Production
             btnCacnelWeeding.Enabled = true;
             btnAddWeeding.Enabled = true;
             btnCreateTeam.Enabled = true;
-            btnLogIn.Text = "Log Out";
+            btnLogIn.Text = "Log Out";  
         }
+
+        public void userLogout()
+        {
+            btnAddEmploye.Enabled = false;
+            btnCreateOffer.Enabled = false;
+            btnDeleteWeeding.Enabled = false;
+            if (lbWorkers.Items.Count == 0)
+            {
+                btnDeleteWorker.Enabled = false;
+            }
+
+            btnConfirmWeeding.Enabled = false;
+            btnAddEquipment.Enabled = false;
+            btnCacnelWeeding.Enabled = false;
+            btnAddWeeding.Enabled = false;
+            btnCreateTeam.Enabled = false;
+            btnLogIn.Text = "Log In";
+
+            lbWorkers.DataSource = null;
+            lbWorkers.Items.Clear();
+        }
+
+
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             if (btnLogIn.Text.Equals("Log In"))
             {
                 LogIn logIn = new LogIn();
-                logIn.Show();
-                this.Hide();
+                if (logIn.ShowDialog(this) == DialogResult.OK)
+                {
+                    userLogin();
+                }
 
             }
             else if (btnLogIn.Text.Equals("Log Out"))
             {
-                Form1 form1 = new Form1();
-                form1.Show();
-                this.Close();
+                userLogout();
             }
 
         }
@@ -90,8 +115,6 @@ namespace FMX_Production
         {
             AddEmploye add = new AddEmploye();
             add.Show();
-
-
         }
 
         private void btnAddEquipment_Click(object sender, EventArgs e)
