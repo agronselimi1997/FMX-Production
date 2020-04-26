@@ -107,24 +107,14 @@ namespace FMX_Production.Views
             chB4k.Enabled = true;
             chBhd.Enabled = true;
             tbName.Clear();
-
             tbLensSerial.Enabled = true;
             cbCameraId.Visible = true;
             fillCameras();
-            fillListBoxes();
-
-
-
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
-
-        }
-
-        private void AddEquipment_Load(object sender, EventArgs e)
-        {
 
         }
 
@@ -183,6 +173,7 @@ namespace FMX_Production.Views
                 if (dataAcess.addEquipment(name, lensSerial, isDron, isKran, isPhotoAparat, isFlycam, cmeraID, isOther))
                 {
                     resetForm();
+                    fillListBoxes();
                 }
                 else
                 {

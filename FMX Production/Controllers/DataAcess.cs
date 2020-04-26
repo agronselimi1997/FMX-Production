@@ -12,9 +12,6 @@ namespace FMX_Production.Controllers
 {
     class DataAcess
     {
-
-
-
         public bool addEmployeToDb(string name, string lastName, string email, string phoneNumber,
             bool isPhotoghraph, bool isKameraman, bool isDronist, bool iskranist, bool isFlycamist)
         {
@@ -27,6 +24,43 @@ namespace FMX_Production.Controllers
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+        }
+         public bool editEmploye(int id, string name, string lastName, string email, string phoneNumber,
+            bool isPhotoghraph, bool isKameraman, bool isDronist, bool iskranist, bool isFlycamist)
+        {
+            string connectionString = Helper.CnnVal("fmxproductionDB");
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd  =  new SqlCommand("dbo.spEditEmployeById", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                        cmd.Parameters.Add("@EmployeName", SqlDbType.VarChar).Value = name;
+                        cmd.Parameters.Add("@surname", SqlDbType.VarChar).Value = lastName;
+                        cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = email;
+                        cmd.Parameters.Add("@phoneNumber", SqlDbType.VarChar).Value = phoneNumber;
+                        cmd.Parameters.Add("@isPhotograph", SqlDbType.Bit).Value = isPhotoghraph;
+                        cmd.Parameters.Add("@isKameraman", SqlDbType.Bit).Value = isKameraman;
+                        cmd.Parameters.Add("@isKransit", SqlDbType.Bit).Value = iskranist;
+                        cmd.Parameters.Add("@isDronist", SqlDbType.Bit).Value = isDronist;
+                        cmd.Parameters.Add("@isFlycamist", SqlDbType.Bit).Value = isFlycamist;
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+
+                    }
+                }
+               
                 return true;
             }
             catch (SqlException ex)
@@ -105,7 +139,8 @@ namespace FMX_Production.Controllers
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("ADD Equipment");
+                Console.WriteLine(ex.Message);
+             
                 return false;
             }
 
@@ -127,7 +162,7 @@ namespace FMX_Production.Controllers
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("Add Camera");
+                Console.WriteLine(ex.Message);
                 return false;
             }
 

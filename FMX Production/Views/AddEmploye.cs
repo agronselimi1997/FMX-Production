@@ -15,6 +15,7 @@ namespace FMX_Production.Views
 {
     public partial class AddEmploye : Form
     {
+        int employeId = 0;
         public AddEmploye()
         {
             InitializeComponent();
@@ -42,12 +43,31 @@ namespace FMX_Production.Views
             chbIsFlycamist.Checked = false;
             chbIsPhotograph.Checked = false;
             chbIsKranist.Checked = false;
+            btnAddWorker.Text = "Shto";
         }
 
+        public void editEmploye(int id,string name, string surname, string email, string phoneNumber,
+            bool isPhotograph, bool isCameraman, bool isDronist, bool isKranist, bool isFlycamist)
+        
+        {
+            employeId = id;
+            btnAddWorker.Text = "Ruaj";
+            tbEmployeEmail.Text = email;
+            tbEmployeName.Text = name;
+            tbEmployeSurname.Text = surname;
+            tbEmployePhoneNumber.Text = phoneNumber;
+            chbIsCameraman.Checked = isCameraman;
+            chbIsDronist.Checked = isDronist;
+            chbIsFlycamist.Checked = isFlycamist;
+            chbIsPhotograph.Checked = isPhotograph;
+            chbIsKranist.Checked = isKranist;
+
+
+        }
 
         private void btnAddWorker_Click(object sender, EventArgs e)
         {
-            //kto kum testirat databazen 
+            
             string name = tbEmployeName.Text;
             string surname = tbEmployeSurname.Text;
             string email = tbEmployeEmail.Text;
@@ -57,19 +77,38 @@ namespace FMX_Production.Views
             bool isDronist = chbIsDronist.Checked;
             bool isKranist = chbIsKranist.Checked;
             bool isFlycamist = chbIsFlycamist.Checked;
-            if (da.addEmployeToDb(name, surname, email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist, isFlycamist))
+            if(btnAddWorker.Text == "Ruaj")
             {
-                resetForm();
-                lblErrorMessage.Text = "Me sukses !";
+                if(da.editEmploye(employeId, name,surname, email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist, isFlycamist ))
+                {
+                    lblErrorMessage.Text = "Me sukses !";
+                    this.Close();
 
+                }
+                else
+                {
+                    MessageBox.Show("Edit Employe Error", "Error", MessageBoxButtons.OK);
+                    resetForm();
+                }
 
             }
             else
             {
-                MessageBox.Show("There was an error while adding the employe", "ok", MessageBoxButtons.OK);
-                resetForm();
+                if (da.addEmployeToDb(name, surname, email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist, isFlycamist))
+                {
+                    resetForm();
+                    lblErrorMessage.Text = "Me sukses !";
 
+
+                }
+                else
+                {
+                    MessageBox.Show("There was an error while adding the employe", "ok", MessageBoxButtons.OK);
+                    resetForm();
+
+                }
             }
+            
         }
 
         private void tbEmployeName_TextChanged(object sender, EventArgs e)

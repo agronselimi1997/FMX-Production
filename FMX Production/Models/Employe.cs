@@ -8,14 +8,14 @@ namespace FMX_Production
 {
     class Employe
     {
-        int id { get; set; }
-        string employeName { get; set; }
-        string employeSurname { get; set; }
-        bool isPhotograph { get; set; }
-        bool isFlycamist { get; set; }
-        bool isKranist { get; set; }
-        bool isDronist { get; set; }
-        bool isKameraman { get; set; }
+        public int id { get; set; }
+        public string employeName { get; set; }
+       public string employeSurname { get; set; }
+       public bool isPhotograph { get; set; }
+       public bool isFlycamist { get; set; }
+       public bool isKranist { get; set; }
+       public bool isDronist { get; set; }
+       public bool isKameraman { get; set; }
         public string employeEmail { get; set; }
         public string phoneNumber { get; set; }
         public string fullinfo

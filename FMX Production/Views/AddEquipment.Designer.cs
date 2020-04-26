@@ -276,7 +276,6 @@
             this.Controls.Add(this.lbEquipment);
             this.Name = "AddEquipment";
             this.Text = "Shto Aparaturë";
-            this.Load += new System.EventHandler(this.AddEquipment_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

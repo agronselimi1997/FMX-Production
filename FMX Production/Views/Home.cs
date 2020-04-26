@@ -13,6 +13,7 @@ namespace FMX_Production
 {
     public partial class Form1 : Form
     {
+
         DataAcess DataAcess = new DataAcess();
         List<Employe> employes = new List<Employe>();
 
@@ -38,12 +39,22 @@ namespace FMX_Production
             btnAddWeeding.Enabled = false;
             btnCreateTeam.Enabled = false;
         }
+        //Filling the List Box lbEmployes with Elements From DataBase 
         void fillEmployes()
         {
             employes = DataAcess.getAllEmployes();
 
             lbWorkers.DataSource = employes;
             lbWorkers.DisplayMember = "fullinfo";
+            if(lbWorkers.Items.Count != 0)
+            {
+                btnDeleteWorker.Enabled = true;
+
+            }
+            else
+            {
+                btnDeleteWorker.Enabled = false;
+            }
 
         }
 
@@ -71,6 +82,7 @@ namespace FMX_Production
             btnLogIn.Text = "Log Out";  
         }
 
+
         public void userLogout()
         {
             btnAddEmploye.Enabled = false;
@@ -93,6 +105,7 @@ namespace FMX_Production
         }
 
 
+        //Opening a log in form 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             if (btnLogIn.Text.Equals("Log In"))
@@ -113,6 +126,8 @@ namespace FMX_Production
 
         private void btnAddEmploye_Click(object sender, EventArgs e)
         {
+            fillEmployes();
+            
             AddEmploye add = new AddEmploye();
             add.Show();
         }
@@ -125,10 +140,18 @@ namespace FMX_Production
 
         private void btnDeleteWorker_Click(object sender, EventArgs e)
         {
-
-            Employe employe = lbWorkers.SelectedItem as Employe;
-            DataAcess.deleteEmployeById(employe.getId());
-            fillEmployes();
+            if(lbWorkers.Items.Count != 0)
+            {
+                
+                Employe employe = lbWorkers.SelectedItem as Employe;
+                DataAcess.deleteEmployeById(employe.getId());
+                fillEmployes();
+            }
+            else
+            {
+                
+            }
+           ;
 
         }
 
@@ -136,8 +159,20 @@ namespace FMX_Production
         {
             if (lbWorkers.SelectedItem != null)
             {
-                MessageBox.Show("Emloye Iinformation Here", "Information!", MessageBoxButtons.OK);
+                Employe employe = lbWorkers.SelectedItem as Employe;
+                AddEmploye edit = new AddEmploye();
+                edit.editEmploye(employe.id,employe.employeName, employe.employeSurname, 
+                                 employe.employeEmail, employe.phoneNumber, employe.isPhotograph, 
+                                 employe.isKameraman,employe.isDronist, employe.isKranist, employe.isFlycamist);
+                edit.ShowDialog();
+                
+               
             }
+        }
+
+        private void lbWorkers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fillEmployes();
         }
     }
 }
