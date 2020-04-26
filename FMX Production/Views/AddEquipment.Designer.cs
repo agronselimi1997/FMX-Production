@@ -249,6 +249,7 @@
             this.lbCameras1.Name = "lbCameras1";
             this.lbCameras1.Size = new System.Drawing.Size(296, 324);
             this.lbCameras1.TabIndex = 30;
+            this.lbCameras1.DoubleClick += new System.EventHandler(this.lbCameras1_DoubleClick);
             // 
             // AddEquipment
             // 

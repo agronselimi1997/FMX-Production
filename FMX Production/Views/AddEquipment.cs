@@ -188,5 +188,16 @@ namespace FMX_Production.Views
         {
             resetForm();
         }
+
+        private void lbCameras1_DoubleClick(object sender, EventArgs e)
+        {
+            if(lbCameras1.SelectedItem != null)
+            {
+                Camera camera = lbCameras1.SelectedItem as Camera;
+                EditCamera editForm = new EditCamera();
+                editForm.editCamera(camera.id, camera.name, camera.isHD, camera.is4K);
+                editForm.ShowDialog();
+            }
+        }
     }
 }

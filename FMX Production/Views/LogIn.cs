@@ -42,5 +42,10 @@ namespace FMX_Production.Views
             }
 
         }
+
+        private void tbPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

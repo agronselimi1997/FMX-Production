@@ -33,15 +33,44 @@ namespace FMX_Production.Controllers
             }
 
         }
-         public bool editEmploye(int id, string name, string lastName, string email, string phoneNumber,
-            bool isPhotoghraph, bool isKameraman, bool isDronist, bool iskranist, bool isFlycamist)
+        public bool editCamera(int id, string name, bool isHD, bool is4K)
+        {
+            string connectionString = Helper.CnnVal("fmxproductionDB");
+            try
+            {
+            using(SqlConnection con =  new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("dbo.spEditCamera", con))
+                {
+                       cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
+                        cmd.Parameters.Add("@model", SqlDbType.VarChar).Value = name;
+                        cmd.Parameters.Add("@isHD", SqlDbType.Bit).Value = isHD;
+                        cmd.Parameters.Add("@is4K", SqlDbType.Bit).Value = is4K;
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        return true;
+
+                }
+            }
+            }catch(SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+        }
+        
+        public bool editEmploye(int id, string name, string lastName, string email, string phoneNumber,
+           bool isPhotoghraph, bool isKameraman, bool isDronist, bool iskranist, bool isFlycamist)
         {
             string connectionString = Helper.CnnVal("fmxproductionDB");
             try
             {
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
-                    using (SqlCommand cmd  =  new SqlCommand("dbo.spEditEmployeById", con))
+                    using (SqlCommand cmd = new SqlCommand("dbo.spEditEmployeById", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
@@ -60,7 +89,7 @@ namespace FMX_Production.Controllers
 
                     }
                 }
-               
+
                 return true;
             }
             catch (SqlException ex)
@@ -140,7 +169,7 @@ namespace FMX_Production.Controllers
             catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
-             
+
                 return false;
             }
 

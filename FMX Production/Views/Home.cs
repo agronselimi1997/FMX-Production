@@ -16,6 +16,7 @@ namespace FMX_Production
 
         DataAcess DataAcess = new DataAcess();
         List<Employe> employes = new List<Employe>();
+        AddEquipment addEquipment = new AddEquipment();
 
         public Form1()
         {
@@ -46,7 +47,7 @@ namespace FMX_Production
 
             lbWorkers.DataSource = employes;
             lbWorkers.DisplayMember = "fullinfo";
-            if(lbWorkers.Items.Count != 0)
+            if (lbWorkers.Items.Count != 0)
             {
                 btnDeleteWorker.Enabled = true;
 
@@ -68,7 +69,7 @@ namespace FMX_Production
             if (lbWorkers.Items.Count == 0)
             {
                 btnDeleteWorker.Enabled = false;
-            } 
+            }
             else
             {
                 btnDeleteWorker.Enabled = true;
@@ -79,7 +80,7 @@ namespace FMX_Production
             btnCacnelWeeding.Enabled = true;
             btnAddWeeding.Enabled = true;
             btnCreateTeam.Enabled = true;
-            btnLogIn.Text = "Log Out";  
+            btnLogIn.Text = "Log Out";
         }
 
 
@@ -127,29 +128,29 @@ namespace FMX_Production
         private void btnAddEmploye_Click(object sender, EventArgs e)
         {
             fillEmployes();
-            
+
             AddEmploye add = new AddEmploye();
             add.Show();
         }
 
         private void btnAddEquipment_Click(object sender, EventArgs e)
         {
-            AddEquipment addEquipment = new AddEquipment();
-            addEquipment.Show();
+            
+            addEquipment.ShowDialog();
         }
 
         private void btnDeleteWorker_Click(object sender, EventArgs e)
         {
-            if(lbWorkers.Items.Count != 0)
+            if (lbWorkers.Items.Count != 0)
             {
-                
+
                 Employe employe = lbWorkers.SelectedItem as Employe;
                 DataAcess.deleteEmployeById(employe.getId());
                 fillEmployes();
             }
             else
             {
-                
+
             }
            ;
 
@@ -161,12 +162,12 @@ namespace FMX_Production
             {
                 Employe employe = lbWorkers.SelectedItem as Employe;
                 AddEmploye edit = new AddEmploye();
-                edit.editEmploye(employe.id,employe.employeName, employe.employeSurname, 
-                                 employe.employeEmail, employe.phoneNumber, employe.isPhotograph, 
-                                 employe.isKameraman,employe.isDronist, employe.isKranist, employe.isFlycamist);
+                edit.editEmploye(employe.id, employe.employeName, employe.employeSurname,
+                                 employe.employeEmail, employe.phoneNumber, employe.isPhotograph,
+                                 employe.isKameraman, employe.isDronist, employe.isKranist, employe.isFlycamist);
                 edit.ShowDialog();
-                
-               
+
+
             }
         }
 

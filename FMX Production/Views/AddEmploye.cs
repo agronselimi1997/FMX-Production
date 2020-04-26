@@ -46,9 +46,9 @@ namespace FMX_Production.Views
             btnAddWorker.Text = "Shto";
         }
 
-        public void editEmploye(int id,string name, string surname, string email, string phoneNumber,
+        public void editEmploye(int id, string name, string surname, string email, string phoneNumber,
             bool isPhotograph, bool isCameraman, bool isDronist, bool isKranist, bool isFlycamist)
-        
+
         {
             employeId = id;
             btnAddWorker.Text = "Ruaj";
@@ -67,7 +67,7 @@ namespace FMX_Production.Views
 
         private void btnAddWorker_Click(object sender, EventArgs e)
         {
-            
+
             string name = tbEmployeName.Text;
             string surname = tbEmployeSurname.Text;
             string email = tbEmployeEmail.Text;
@@ -77,9 +77,9 @@ namespace FMX_Production.Views
             bool isDronist = chbIsDronist.Checked;
             bool isKranist = chbIsKranist.Checked;
             bool isFlycamist = chbIsFlycamist.Checked;
-            if(btnAddWorker.Text == "Ruaj")
+            if (btnAddWorker.Text == "Ruaj")
             {
-                if(da.editEmploye(employeId, name,surname, email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist, isFlycamist ))
+                if (da.editEmploye(employeId, name, surname, email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist, isFlycamist))
                 {
                     lblErrorMessage.Text = "Me sukses !";
                     this.Close();
@@ -108,7 +108,7 @@ namespace FMX_Production.Views
 
                 }
             }
-            
+
         }
 
         private void tbEmployeName_TextChanged(object sender, EventArgs e)
