@@ -53,7 +53,8 @@
             this.tbEmployeName.Name = "tbEmployeName";
             this.tbEmployeName.Size = new System.Drawing.Size(299, 30);
             this.tbEmployeName.TabIndex = 0;
-            this.tbEmployeName.TextChanged += new System.EventHandler(this.tbEmployeName_TextChanged);
+            this.tbEmployeName.Leave += new System.EventHandler(this.tbEmployeName_Leave);
+            this.tbEmployeName.Validating += new System.ComponentModel.CancelEventHandler(this.tbEmployeName_Validating);
             // 
             // tbEmployeSurname
             // 
@@ -62,6 +63,7 @@
             this.tbEmployeSurname.Name = "tbEmployeSurname";
             this.tbEmployeSurname.Size = new System.Drawing.Size(299, 30);
             this.tbEmployeSurname.TabIndex = 1;
+            this.tbEmployeSurname.Leave += new System.EventHandler(this.tbEmployeSurname_Leave);
             // 
             // tbEmployeEmail
             // 
@@ -70,6 +72,7 @@
             this.tbEmployeEmail.Name = "tbEmployeEmail";
             this.tbEmployeEmail.Size = new System.Drawing.Size(299, 30);
             this.tbEmployeEmail.TabIndex = 2;
+            this.tbEmployeEmail.Leave += new System.EventHandler(this.tbEmployeEmail_Leave);
             // 
             // tbEmployePhoneNumber
             // 
@@ -78,6 +81,7 @@
             this.tbEmployePhoneNumber.Name = "tbEmployePhoneNumber";
             this.tbEmployePhoneNumber.Size = new System.Drawing.Size(299, 30);
             this.tbEmployePhoneNumber.TabIndex = 3;
+            this.tbEmployePhoneNumber.Leave += new System.EventHandler(this.tbEmployePhoneNumber_Leave);
             // 
             // label1
             // 

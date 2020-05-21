@@ -47,6 +47,7 @@ namespace FMX_Production
 
             lbWorkers.DataSource = employes;
             lbWorkers.DisplayMember = "fullinfo";
+            lbWorkers.SelectedItem = null;
             if (lbWorkers.Items.Count != 0)
             {
                 btnDeleteWorker.Enabled = true;
@@ -127,10 +128,14 @@ namespace FMX_Production
 
         private void btnAddEmploye_Click(object sender, EventArgs e)
         {
-            fillEmployes();
-
             AddEmploye add = new AddEmploye();
-            add.Show();
+            if(add.ShowDialog(this) == DialogResult.OK)
+            {
+                fillEmployes();
+            }
+
+
+
         }
 
         private void btnAddEquipment_Click(object sender, EventArgs e)
@@ -173,6 +178,12 @@ namespace FMX_Production
 
         private void lbWorkers_SelectedIndexChanged(object sender, EventArgs e)
         {
+            fillEmployes();
+        }
+
+        private void lbWorkers_Leave(object sender, EventArgs e)
+        {
+            lbWorkers.SelectedItem = null;
             fillEmployes();
         }
     }

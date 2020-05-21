@@ -16,6 +16,7 @@ namespace FMX_Production.Views
     public partial class AddEmploye : Form
     {
         int employeId = 0;
+        ErrorProvider errorProvider = new ErrorProvider();
         public AddEmploye()
         {
             InitializeComponent();
@@ -45,6 +46,7 @@ namespace FMX_Production.Views
             chbIsKranist.Checked = false;
             btnAddWorker.Text = "Shto";
         }
+        
 
         public void editEmploye(int id, string name, string surname, string email, string phoneNumber,
             bool isPhotograph, bool isCameraman, bool isDronist, bool isKranist, bool isFlycamist)
@@ -82,6 +84,7 @@ namespace FMX_Production.Views
                 if (da.editEmploye(employeId, name, surname, email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist, isFlycamist))
                 {
                     lblErrorMessage.Text = "Me sukses !";
+                    
                     this.Close();
 
                 }
@@ -97,6 +100,7 @@ namespace FMX_Production.Views
                 if (da.addEmployeToDb(name, surname, email, phonenumber, isPhorograph, isCameraman, isDronist, isKranist, isFlycamist))
                 {
                     resetForm();
+                    DialogResult = DialogResult.OK;
                     lblErrorMessage.Text = "Me sukses !";
 
 
@@ -114,6 +118,83 @@ namespace FMX_Production.Views
         private void tbEmployeName_TextChanged(object sender, EventArgs e)
         {
             lblErrorMessage.Text = "";
+        }
+
+        private void tbEmployeName_Leave(object sender, EventArgs e)
+        {
+            validateName();
+        }
+        public void validateName()
+        {
+            if (String.IsNullOrEmpty(tbEmployeName.Text))
+            {
+                tbEmployeName.Focus();
+                errorProvider.SetError(tbEmployeName, "Fusha duhet mbushur pa tjeter!");
+
+            }
+            else
+            {
+                errorProvider.SetError(tbEmployeName, null);
+            }
+        }
+        public void validateSurname()
+        {
+            if (String.IsNullOrEmpty(tbEmployeSurname.Text))
+            {
+                tbEmployeSurname.Focus();
+                errorProvider.SetError(tbEmployeSurname, "Fusha duhet mbushur pa tjeter!");
+
+            }
+            else
+            {
+                errorProvider.SetError(tbEmployeSurname, null);
+            }
+        }
+        public void validateEmail()
+        {
+            if (!tbEmployeEmail.Text.EndsWith("@gmail.com"))
+            {
+                tbEmployeEmail.Focus();
+                errorProvider.SetError(tbEmployeEmail, "Invalid Email,pa tjeter te jete... example@gmail.com");
+
+            }
+            else
+            {
+                errorProvider.SetError(tbEmployeEmail, null);
+            }
+        }
+        public void validatePhoneNumber()
+        {
+            if(!(tbEmployePhoneNumber.Text.StartsWith("07") && (tbEmployePhoneNumber.Text.Length == 9)))
+            {
+                tbEmployePhoneNumber.Focus();
+                errorProvider.SetError(tbEmployePhoneNumber, "Invalid Phone number (07x-xxx-xxx");
+
+            }
+            else
+            {
+                errorProvider.SetError(tbEmployePhoneNumber, null);
+            }
+        }
+        private void tbEmployeName_Validating(object sender, CancelEventArgs e)
+        {
+           
+
+        }
+
+        private void tbEmployeEmail_Leave(object sender, EventArgs e)
+        {
+            validateEmail();
+        }
+
+        private void tbEmployeSurname_Leave(object sender, EventArgs e)
+        {
+            validateSurname();
+        }
+
+        private void tbEmployePhoneNumber_Leave(object sender, EventArgs e)
+        {
+            validatePhoneNumber();
         }
     }
 }

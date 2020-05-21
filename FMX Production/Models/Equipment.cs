@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FMX_Production.Controllers;
 
 namespace FMX_Production.Models
 {
     class Equipment
     {
+        DataAcess data = new DataAcess();
+        public Camera equipedCamera;
         public int id { get; set; }
         public string name { get; set; }
         public string lensSerial { get; set; }
@@ -36,13 +39,24 @@ namespace FMX_Production.Models
             this.is4K = is4K;
             this.CameraID = cameraID;
             this.isOther = isOther;
+            this.equipedCamera = data.getCameraById(cameraID);
+        }
+        public bool editCameraById( int cameraId)
+        {
+            int equipmentId = this.id;
+            if(!data.editEquipmentCamera(equipmentId, cameraId))
+            {
+                return false;
+            }else
+            {
+                return true;
+            }
         }
         Equipment(System.Int32 Id, System.String Name, System.String lensSerial, System.Boolean isDron, System.Boolean isKran, System.Boolean isPhotoAparat, System.Boolean isFlycam, System.Int32 CameraID, System.Boolean isOther)
         {
             this.id = Id;
             this.name = Name;
             this.lensSerial = lensSerial;
-            this.isCamera = isCamera;
             this.isDron = isDron;
             this.isKran = isKran;
             this.isPhotoAparat = isPhotoAparat;
@@ -51,6 +65,9 @@ namespace FMX_Production.Models
             this.is4K = is4K;
             this.CameraID = CameraID;
             this.isOther = isOther;
+            var camera =  data.getCameraById(CameraID);
+            equipedCamera = camera;
+
         }
 
 

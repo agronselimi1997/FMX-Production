@@ -57,6 +57,7 @@
             this.lbEquipment.Name = "lbEquipment";
             this.lbEquipment.Size = new System.Drawing.Size(296, 324);
             this.lbEquipment.TabIndex = 6;
+            this.lbEquipment.DoubleClick += new System.EventHandler(this.lbEquipment_DoubleClick);
             // 
             // btnCancel
             // 

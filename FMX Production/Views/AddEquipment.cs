@@ -39,14 +39,15 @@ namespace FMX_Production.Views
 
                 chB4k.Enabled = false;
                 chBhd.Enabled = false;
+                cbCameraId.SelectedIndex = -1;
                 cbCameraId.Visible = false;
+                
 
             }
             if (rbCamera.Checked == true)
             {
                 resetForm();
                 tbLensSerial.Enabled = false;
-
                 cbCameraId.Visible = false;
 
             }
@@ -54,14 +55,12 @@ namespace FMX_Production.Views
             {
                 resetForm();
                 tbLensSerial.Enabled = false;
-
                 cbCameraId.Visible = false;
             }
             if (rbFlycam.Checked == true)
             {
                 resetForm();
                 tbLensSerial.Enabled = false;
-
                 cbCameraId.Visible = true;
                 chB4k.Enabled = false;
                 chBhd.Enabled = false;
@@ -109,6 +108,7 @@ namespace FMX_Production.Views
             tbName.Clear();
             tbLensSerial.Enabled = true;
             cbCameraId.Visible = true;
+           
             fillCameras();
         }
 
@@ -184,6 +184,7 @@ namespace FMX_Production.Views
             }
         }
 
+
         private void btnResetForm_Click(object sender, EventArgs e)
         {
             resetForm();
@@ -198,6 +199,39 @@ namespace FMX_Production.Views
                 editForm.editCamera(camera.id, camera.name, camera.isHD, camera.is4K);
                 editForm.ShowDialog();
             }
+        }
+        public void editQeuipment(int id, string name, string lensSerial,  bool isDron, bool isKran, bool isPhotoAparat, bool isFlycam, bool isHD, bool is4K, int cameraID, bool isOther)
+        {
+            tbName.Text = name;
+            tbLensSerial.Text = lensSerial;
+            rbAparat.Checked = isPhotoAparat;
+            rbDron.Checked = isDron;
+            rbFlycam.Checked = isFlycam;
+            rbKran.Checked = isKran;
+            chB4k.Checked = is4K;
+            chBhd.Checked = isHD;
+            rbOther.Checked = isOther;
+            lbCameras1.Visible = false;
+            lbEquipment.Visible = false;
+            rbCamera.Visible = false;
+        }
+
+        private void lbEquipment_DoubleClick(object sender, EventArgs e)
+        {
+            Equipment equipmentToEdit = lbEquipment.SelectedItem as Equipment;
+            string name = equipmentToEdit.name;
+            string lensSerial = equipmentToEdit.lensSerial;
+            int cameraID = equipmentToEdit.CameraID;
+            bool isflycam = equipmentToEdit.isFlycam;
+            bool isOther = equipmentToEdit.isOther;
+            bool isPhotoAparat = equipmentToEdit.isPhotoAparat;
+            bool is4K = equipmentToEdit.is4K;
+            bool isHD = equipmentToEdit.isHD;
+            bool isKran = equipmentToEdit.isKran;
+            int id = equipmentToEdit.id;
+            bool isDron = equipmentToEdit.isDron;
+
+           
         }
     }
 }

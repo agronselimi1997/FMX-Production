@@ -174,7 +174,24 @@ namespace FMX_Production.Controllers
             }
 
         }
-
+        public Camera getCameraById(int id)
+        {
+            string connectionString = Helper.CnnVal("fmxproductionDB");
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    List<Camera> cameras = con.Query<Camera>("dbo.spCameraGetById '" + id + "'").ToList();
+                    return cameras.First();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
 
         public bool addCamera(string name, bool isHD, bool is4K)
         {
@@ -195,6 +212,32 @@ namespace FMX_Production.Controllers
                 return false;
             }
 
+        }
+        public bool editEquipmentCamera ( int equipmentId, int cameraId)
+        {
+            string connectionString = Helper.CnnVal("fmxpeoductionDB");
+            try {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("dbo.spEquipmentEquipCameraById", connection))
+
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@equipmentId", SqlDbType.Int).Value = equipmentId;
+                        cmd.Parameters.Add("cameraId", SqlDbType.Int).Value = cameraId;
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                        return true;
+
+                        
+                    }
+            }
+            }catch(SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
     }
