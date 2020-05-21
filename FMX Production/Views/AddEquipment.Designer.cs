@@ -164,7 +164,7 @@
             // 
             this.chB4k.AutoSize = true;
             this.chB4k.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chB4k.Location = new System.Drawing.Point(465, 84);
+            this.chB4k.Location = new System.Drawing.Point(501, 83);
             this.chB4k.Name = "chB4k";
             this.chB4k.Size = new System.Drawing.Size(61, 29);
             this.chB4k.TabIndex = 19;
@@ -175,7 +175,7 @@
             // 
             this.chBhd.AutoSize = true;
             this.chBhd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chBhd.Location = new System.Drawing.Point(545, 83);
+            this.chBhd.Location = new System.Drawing.Point(602, 83);
             this.chBhd.Name = "chBhd";
             this.chBhd.Size = new System.Drawing.Size(64, 29);
             this.chBhd.TabIndex = 20;
@@ -256,7 +256,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 727);
+            this.ClientSize = new System.Drawing.Size(689, 727);
             this.Controls.Add(this.lbCameras1);
             this.Controls.Add(this.btnResetForm);
             this.Controls.Add(this.btnAddEquipment);

@@ -38,11 +38,11 @@ namespace FMX_Production.Controllers
             string connectionString = Helper.CnnVal("fmxproductionDB");
             try
             {
-            using(SqlConnection con =  new SqlConnection(connectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand("dbo.spEditCamera", con))
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
-                       cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = new SqlCommand("dbo.spEditCamera", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
                         cmd.Parameters.Add("@model", SqlDbType.VarChar).Value = name;
                         cmd.Parameters.Add("@isHD", SqlDbType.Bit).Value = isHD;
@@ -52,16 +52,17 @@ namespace FMX_Production.Controllers
                         con.Close();
                         return true;
 
+                    }
                 }
             }
-            }catch(SqlException ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
             }
 
         }
-        
+
         public bool editEmploye(int id, string name, string lastName, string email, string phoneNumber,
            bool isPhotoghraph, bool isKameraman, bool isDronist, bool iskranist, bool isFlycamist)
         {
@@ -153,18 +154,33 @@ namespace FMX_Production.Controllers
             }
         }
 
-        public bool addEquipment(string name, string lensSerial, bool isDron, bool isKran, bool isPhotoAparat, bool isFlycam, int cmeraID, bool isOther)
+        public bool addEquipment(string name, string lensSerial, bool isDron, bool isKran, bool isPhotoAparat, bool isFlycam, Nullable<int> cmeraID, bool isOther)
         {
+            string connectionString = Helper.CnnVal("fmxproductionDB");
             try
             {
-                SqlConnection con = new SqlConnection(Helper.CnnVal("fmxproductionDB"));
-                con.Open();
-                string query = "insert into Equipments (Name, LensSerial, isDron, isKran, isPhotoAparat, isFlycam, CameraID, isOther)";
-                query += " values('" + name + "','" + lensSerial + "','" + isDron + "','" + isKran + "','" + isPhotoAparat + "','" + isFlycam + "','" + cmeraID + "','" + isOther + "')";
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-                return true;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("dbo.spEquipmentsAddEquipment ", connection))
+
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@name", SqlDbType.VarChar).Value = name;
+                        cmd.Parameters.Add("@lensSerial", SqlDbType.VarChar).Value = lensSerial;
+                        cmd.Parameters.Add("@isDron", SqlDbType.Bit).Value = isDron;
+                        cmd.Parameters.Add("@isKran", SqlDbType.Bit).Value = isKran;
+                        cmd.Parameters.Add("@isPhotoAparat", SqlDbType.Bit).Value = isPhotoAparat;
+                        cmd.Parameters.Add("@isFlycam", SqlDbType.Bit).Value = isFlycam;
+                        cmd.Parameters.Add("@cameraId", SqlDbType.Int).Value = cmeraID;
+                        cmd.Parameters.Add("@isOther", SqlDbType.Bit).Value = isOther;
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                        return true;
+
+
+                    }
+                }
             }
             catch (SqlException ex)
             {
@@ -174,7 +190,7 @@ namespace FMX_Production.Controllers
             }
 
         }
-        public Camera getCameraById(int id)
+        public Camera getCameraById(Nullable<int> id)
         {
             string connectionString = Helper.CnnVal("fmxproductionDB");
             try
@@ -213,13 +229,14 @@ namespace FMX_Production.Controllers
             }
 
         }
-        public bool editEquipmentCamera ( int equipmentId, int cameraId)
+        public bool editEquipmentCamera(int equipmentId, int cameraId)
         {
-            string connectionString = Helper.CnnVal("fmxpeoductionDB");
-            try {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            string connectionString = Helper.CnnVal("fmxproductionDB");
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("dbo.spEquipmentEquipCameraById", connection))
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("dbo.spEquipmentEquipCameraById", connection))
 
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -230,10 +247,11 @@ namespace FMX_Production.Controllers
                         connection.Close();
                         return true;
 
-                        
+
                     }
+                }
             }
-            }catch(SqlException ex)
+            catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;

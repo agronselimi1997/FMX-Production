@@ -21,11 +21,11 @@ namespace FMX_Production.Models
         public bool isFlycam { get; set; }
         public bool isHD { get; set; }
         public bool is4K { get; set; }
-        public int CameraID { get; set; }
+        public Nullable <int> CameraID { get; set; }
         public bool isOther { get; set; }
 
 
-        public Equipment(int id, string name, string lensSerial, bool isCamera, bool isDron, bool isKran, bool isPhotoAparat, bool isFlycam, bool isHD, bool is4K, int cameraID, bool isOther)
+        public Equipment(int id, string name, string lensSerial, bool isCamera, bool isDron, bool isKran, bool isPhotoAparat, bool isFlycam, bool isHD, bool is4K, Nullable<int> cameraID, bool isOther)
         {
             this.id = id;
             this.name = name;
@@ -52,7 +52,7 @@ namespace FMX_Production.Models
                 return true;
             }
         }
-        Equipment(System.Int32 Id, System.String Name, System.String lensSerial, System.Boolean isDron, System.Boolean isKran, System.Boolean isPhotoAparat, System.Boolean isFlycam, System.Int32 CameraID, System.Boolean isOther)
+        Equipment(System.Int32 Id, System.String Name, System.String lensSerial, System.Boolean isDron, System.Boolean isKran, System.Boolean isPhotoAparat, System.Boolean isFlycam, Nullable<int> CameraID, System.Boolean isOther)
         {
             this.id = Id;
             this.name = Name;
@@ -65,8 +65,15 @@ namespace FMX_Production.Models
             this.is4K = is4K;
             this.CameraID = CameraID;
             this.isOther = isOther;
-            var camera =  data.getCameraById(CameraID);
-            equipedCamera = camera;
+            if(CameraID == null)
+            {
+            }
+            else
+            {
+                var camera = data.getCameraById(CameraID);
+                equipedCamera = camera;
+            }
+           
 
         }
 

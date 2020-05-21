@@ -18,6 +18,7 @@ namespace FMX_Production.Views
         List<Camera> cameras = new List<Camera>();
         List<Camera> Camera1 = new List<Camera>();
         List<Equipment> equipments = new List<Equipment>();
+        ErrorProvider errorProvider = new ErrorProvider();
         public AddEquipment()
         {
             InitializeComponent();
@@ -39,9 +40,9 @@ namespace FMX_Production.Views
 
                 chB4k.Enabled = false;
                 chBhd.Enabled = false;
-                cbCameraId.SelectedIndex = -1;
+
                 cbCameraId.Visible = false;
-                
+
 
             }
             if (rbCamera.Checked == true)
@@ -108,7 +109,23 @@ namespace FMX_Production.Views
             tbName.Clear();
             tbLensSerial.Enabled = true;
             cbCameraId.Visible = true;
-           
+
+
+            fillCameras();
+
+        }
+        public void resetButton()
+        {
+            tbLensSerial.Clear();
+            chB4k.Checked = false;
+            chBhd.Checked = false;
+            chB4k.Enabled = true;
+            chBhd.Enabled = true;
+            tbName.Clear();
+            tbLensSerial.Enabled = true;
+            cbCameraId.Visible = true;
+            rbCamera.Checked = true;
+            check();
             fillCameras();
         }
 
@@ -154,45 +171,62 @@ namespace FMX_Production.Views
             bool isPhotoAparat = rbAparat.Checked;
             bool isFlycam = rbFlycam.Checked;
             bool isOther = rbOther.Checked;
-            Camera selectedCamera = cbCameraId.SelectedItem as Camera;
-            int cmeraID = selectedCamera.id;
-            if (rbCamera.Checked == true)
+            Nullable<int> cmeraID = null;
+
+            if (cbCameraId.SelectedItem != null)
             {
-                if (dataAcess.addCamera(name, isHD, is4K))
-                {
-                    resetForm();
-                }
-                else
-                {
-                    MessageBox.Show("Something went wrong while adding camera", "Add Camera Messaage", MessageBoxButtons.OK);
-                    resetForm();
-                }
+                Camera selectedCamera = cbCameraId.SelectedItem as Camera;
+                cmeraID = selectedCamera.id;
             }
-            else
+
+
+            if (validateChb4korHd() && validateEquipmentName() && validateLensSerial())
             {
-                if (dataAcess.addEquipment(name, lensSerial, isDron, isKran, isPhotoAparat, isFlycam, cmeraID, isOther))
+                if (rbCamera.Checked == true)
                 {
-                    resetForm();
-                    fillListBoxes();
+                    if (dataAcess.addCamera(name, isHD, is4K))
+                    {
+                        fillListBoxes();
+                        resetButton();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Something went wrong while adding camera", "Add Camera Messaage", MessageBoxButtons.OK);
+                        resetButton();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Adding Equipment Went Wrong", "Add Equipment Message", MessageBoxButtons.OK);
-                    resetForm();
+                    if (dataAcess.addEquipment(name, lensSerial, isDron, isKran, isPhotoAparat, isFlycam, cmeraID, isOther))
+                    {
+                        resetButton();
+                        fillListBoxes();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Adding Equipment Went Wrong", "Add Equipment Message", MessageBoxButtons.OK);
+                        resetButton();
+                    }
+
                 }
 
             }
+            else
+            {
+                tbName.Focus();
+            }
+
         }
 
 
         private void btnResetForm_Click(object sender, EventArgs e)
         {
-            resetForm();
+            resetButton();
         }
 
         private void lbCameras1_DoubleClick(object sender, EventArgs e)
         {
-            if(lbCameras1.SelectedItem != null)
+            if (lbCameras1.SelectedItem != null)
             {
                 Camera camera = lbCameras1.SelectedItem as Camera;
                 EditCamera editForm = new EditCamera();
@@ -200,7 +234,7 @@ namespace FMX_Production.Views
                 editForm.ShowDialog();
             }
         }
-        public void editQeuipment(int id, string name, string lensSerial,  bool isDron, bool isKran, bool isPhotoAparat, bool isFlycam, bool isHD, bool is4K, int cameraID, bool isOther)
+        public void editQeuipment(int id, string name, string lensSerial, bool isDron, bool isKran, bool isPhotoAparat, bool isFlycam, bool isHD, bool is4K, int cameraID, bool isOther)
         {
             tbName.Text = name;
             tbLensSerial.Text = lensSerial;
@@ -221,7 +255,7 @@ namespace FMX_Production.Views
             Equipment equipmentToEdit = lbEquipment.SelectedItem as Equipment;
             string name = equipmentToEdit.name;
             string lensSerial = equipmentToEdit.lensSerial;
-            int cameraID = equipmentToEdit.CameraID;
+            Nullable<int> cameraID = equipmentToEdit.CameraID;
             bool isflycam = equipmentToEdit.isFlycam;
             bool isOther = equipmentToEdit.isOther;
             bool isPhotoAparat = equipmentToEdit.isPhotoAparat;
@@ -231,7 +265,63 @@ namespace FMX_Production.Views
             int id = equipmentToEdit.id;
             bool isDron = equipmentToEdit.isDron;
 
-           
+
+        }
+
+        //Form Validation
+        public bool validateEquipmentName()
+        {
+            if (tbName.Text.Length == 0)
+            {
+                tbName.Focus();
+                errorProvider.SetError(tbName, "Invalid name");
+                return false;
+            }
+            else
+            {
+                errorProvider.SetError(tbName, null);
+                return true;
+            }
+        }
+        public bool validateLensSerial()
+        {
+            if (tbLensSerial.Enabled == true && tbLensSerial.Text.Length == 0)
+            {
+                tbLensSerial.Focus();
+                errorProvider.SetError(tbLensSerial, "Invalid Serial number!");
+                return false;
+            }
+            else
+            {
+                errorProvider.SetError(tbLensSerial, null);
+                return true;
+            }
+        }
+        public bool validateChb4korHd()
+        {
+            if (chB4k.Enabled == true && chBhd.Enabled == true)
+            {
+                if (!(chBhd.Checked == false || chBhd.Checked == false))
+                {
+                    errorProvider.SetError(chB4k, "Please, check at least one");
+                    errorProvider.SetError(chBhd, "Please, check at least one");
+                    return false;
+
+                }
+                else
+                {
+                    errorProvider.SetError(chBhd, null);
+                    errorProvider.SetError(chB4k, null);
+                    return true;
+
+                }
+
+            }
+            else
+            {
+                return true;
+            }
+
         }
     }
 }
